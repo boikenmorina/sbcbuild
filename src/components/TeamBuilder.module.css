@@ -1,0 +1,58 @@
+/* TeamBuilder.module.css */
+
+.builderContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.positionsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px;
+}
+
+.positionBox {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropTarget {
+    border: 2px dashed #aaa;
+}
+
+.draggablePlayer {
+    cursor: pointer;
+}
+
+.filterContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filterButton {
+    padding: 10px 15px;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.filterButton:hover {
+    background-color: #e7e7e7;
+}
