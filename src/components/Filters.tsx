@@ -12,10 +12,23 @@ interface Player {
     user: number;
 }
 
+interface ClubsData {
+    [clubName: string]: Player[];
+}
+
+interface LeagueData {
+    [leagueName: string]: {
+        clubs: ClubsData;
+    };
+}
+
+interface NationsData {
+    [nationName: string]: Player[];
+}
+
 interface FilteredPlayers {
-    leagues: Record<string, Player[]>;
-    clubs: Record<string, Player[]>;
-    nations: Record<string, Player[]>;
+    leagues: LeagueData;
+    nations: NationsData;
 }
 
 const Filters: React.FC = () => {
@@ -46,31 +59,25 @@ const Filters: React.FC = () => {
 
     return (
         <div>
-            {/* Handling Leagues */}
-            <button onClick={() => setShowLeagues(!showLeagues)}>Leagues</button>
+          {/* Handling Leagues */}
+          <button onClick={() => setShowLeagues(!showLeagues)}>Leagues</button>
             {showLeagues && players?.leagues && (
                 Object.keys(players.leagues).map(league => (
                     <div key={league}>
                         <button onClick={() => setSelectedLeague(league)}>{league}</button>
-                        {selectedLeague === league && players.leagues[league].map(player => (
-                            <div key={player.id}>{player.name}</div>
+                        {selectedLeague === league && Object.keys(players.leagues[league].clubs).map(club => (
+                            <div key={club}>
+                                <button onClick={() => setSelectedClub(club)}>{club}</button>
+                                {selectedClub === club && players.leagues[league].clubs[club].map(player => (
+                                    <div key={player.id}>{player.name}</div>
+                                ))}
+                            </div>
                         ))}
                     </div>
                 ))
             )}
 
-            {/* Handling Clubs */}
-            <button onClick={() => setShowClubs(!showClubs)}>Clubs</button>
-            {showClubs && players?.clubs && (
-                Object.keys(players.clubs).map(club => (
-                    <div key={club}>
-                        <button onClick={() => setSelectedClub(club)}>{club}</button>
-                        {selectedClub === club && players.clubs[club].map(player => (
-                            <div key={player.id}>{player.name}</div>
-                        ))}
-                    </div>
-                ))
-            )}
+            {/* Handling Nations ...  same as before, no changes needed */}
 
             {/* Handling Nations */}
             <button onClick={() => setShowNations(!showNations)}>Nations</button>

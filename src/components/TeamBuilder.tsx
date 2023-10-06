@@ -2,7 +2,7 @@ import React from 'react';
 import './TeamBuilder.module.css';
 
 const TeamBuilder: React.FC = () => {
-    const positions = ['GK', 'CB', 'CB', 'LB', 'RB','CM','CM','RM', 'LM','ST', 'ST', ];
+    const positions = ['GK: Martinez', 'CB: Varane', 'CB', 'LB : Mendy', 'RB: Clauss','CM','CM','RM', 'LM','ST: Mbappe', 'ST: Payet', ];
 
     const styles = {
         teamArea: {

@@ -3,12 +3,18 @@ import React from 'react';
 const SuggestedPlayers: React.FC = () => {
     const players = [
         {name: 'Messi', rating: 92},
-        {name: 'Ronaldo', rating: 92},
-        {name: 'Diaz', rating: 86},
+        {name: 'Kimpembe', rating: 86},
+        {name: 'Kolo Muani', rating: 81},
         // ... add more players as required
     ];
 
     const styles = {
+        headerContainer: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            padding: '10px 20px',
+            borderBottom: '1px solid #ddd',
+        },
         container: {
             display: 'flex',
             flexDirection: 'row' as 'row',
@@ -29,14 +35,22 @@ const SuggestedPlayers: React.FC = () => {
     };
 
     return (
-        <div style={styles.container}>
-            {players.map(player => (
-                <div key={player.name} style={styles.player}>
-                    <strong>{player.name}</strong>
-                    <div>Rating: {player.rating}</div>
-                    
-                </div>
-            ))}
+        <div>
+            {/* Header section with Chemistry and Rating */}
+            <div style={styles.headerContainer}>
+                <div>Chemistry: 15</div>
+                <div>Rating: 51</div>
+            </div>
+
+            {/* Players list */}
+            <div style={styles.container}>
+                {players.map(player => (
+                    <div key={player.name} style={styles.player}>
+                        <strong>{player.name}</strong>
+                        <div>Rating: {player.rating}</div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
