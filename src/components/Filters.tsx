@@ -87,7 +87,10 @@ const Filters: React.FC = () => {
                             <div key={club}>
                                 <button onClick={() => setSelectedClub(club)}>{club} ({players.leagues[league].clubs[club].length})</button>
                                 {selectedClub === club && players.leagues[league].clubs[club].map(player => (
-                                    <DraggablePlayer key={player.id} player={player} />
+                                    <React.Fragment key={player.id}>
+                                    <DraggablePlayer player={player} />
+                                    <span>({player.position})</span>
+                                </React.Fragment>
                                 ))}
                             </div>
                         ))}
@@ -104,7 +107,11 @@ const Filters: React.FC = () => {
                     <div key={nation}>
                         <button onClick={() => setSelectedNation(nation)}>{nation} ({players.nations[nation].length}) </button>
                         {selectedNation === nation && players.nations[nation].map(player => (
-                            <DraggablePlayer key={player.id} player={player} />
+                            <React.Fragment key={player.id}>
+                            <DraggablePlayer player={player} />
+                            <span>({player.position})</span>
+                        </React.Fragment>
+                            
                         ))}
                     </div>
                 ))
