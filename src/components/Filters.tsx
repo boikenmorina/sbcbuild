@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDrag } from 'react-dnd';
 import './Filters.module.css';
 
 interface Player {
@@ -31,6 +32,20 @@ interface FilteredPlayers {
     nations: NationsData;
 }
 
+const DraggablePlayer: React.FC<{ player: Player }> = ({ player }) => {
+    const [, ref] = useDrag({
+      type: 'PLAYER',
+      item: { id: player.id, name: player.name, rating: player.rating }
+    });
+  
+    return (
+      <div ref={ref}>
+        {player.name}
+      </div>
+    );
+  };
+  
+
 const Filters: React.FC = () => {
     const [showLeagues, setShowLeagues] = useState(false);
     const [showClubs, setShowClubs] = useState(false);
@@ -41,6 +56,9 @@ const Filters: React.FC = () => {
     const [selectedNation, setSelectedNation] = useState<string | null>(null);
     
     const [players, setPlayers] = useState<FilteredPlayers | null>(null);
+
+    
+    
 
     useEffect(() => {
         fetch('http://127.0.0.1:8000/player_search/api/players/data/', {
@@ -67,9 +85,9 @@ const Filters: React.FC = () => {
                         <button onClick={() => setSelectedLeague(league)}>{league}</button>
                         {selectedLeague === league && Object.keys(players.leagues[league].clubs).map(club => (
                             <div key={club}>
-                                <button onClick={() => setSelectedClub(club)}>{club}</button>
+                                <button onClick={() => setSelectedClub(club)}>{club} ({players.leagues[league].clubs[club].length})</button>
                                 {selectedClub === club && players.leagues[league].clubs[club].map(player => (
-                                    <div key={player.id}>{player.name}</div>
+                                    <DraggablePlayer key={player.id} player={player} />
                                 ))}
                             </div>
                         ))}
@@ -84,9 +102,9 @@ const Filters: React.FC = () => {
             {showNations && players?.nations && (
                 Object.keys(players.nations).map(nation => (
                     <div key={nation}>
-                        <button onClick={() => setSelectedNation(nation)}>{nation}</button>
+                        <button onClick={() => setSelectedNation(nation)}>{nation} ({players.nations[nation].length}) </button>
                         {selectedNation === nation && players.nations[nation].map(player => (
-                            <div key={player.id}>{player.name}</div>
+                            <DraggablePlayer key={player.id} player={player} />
                         ))}
                     </div>
                 ))
@@ -95,5 +113,7 @@ const Filters: React.FC = () => {
     );
 }
 
+       
+                                
 export default Filters;
 
