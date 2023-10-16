@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Filters from './components/Filters';
 import TeamBuilder from './components/TeamBuilder';
 
-import TeamForm from './components/TeamForm';
+import SubmitTeamForm from './components/SubmitTeamForm';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -17,8 +17,7 @@ const App: React.FC = () => {
       <div className="content">
         <Filters />
         <TeamBuilder />
-        
-        <TeamForm />
+       
       </div>
     </div>
     </DndProvider>

@@ -63,7 +63,7 @@ const Filters: React.FC = () => {
     useEffect(() => {
         fetch('http://127.0.0.1:8000/player_search/api/players/data/', {
             method: 'GET',
-            credentials: 'include', // This is important for sending the cookie/session
+            credentials: 'include', 
         })
             .then(response => response.json())
             .then(data => {
@@ -98,7 +98,7 @@ const Filters: React.FC = () => {
                 ))
             )}
 
-            {/* Handling Nations ...  same as before, no changes needed */}
+            
 
             {/* Handling Nations */}
             <button onClick={() => setShowNations(!showNations)}>Nations</button>

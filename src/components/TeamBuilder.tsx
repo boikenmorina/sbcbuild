@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './TeamBuilder.module.css';
 import { useDrop, useDrag } from 'react-dnd';
+import SubmitTeamForm from './SubmitTeamForm';
 
 interface Player {
     id: number;
@@ -103,6 +104,10 @@ const TeamBuilder: React.FC = () => {
     const [teamRating, setTeamRating] = useState(0);
     const [teamChemistry, setTeamChemistry] = useState(0);
 
+    const clearTeam = () => {
+        setPlayersInPositions({}); // Clear the players in positions
+      };
+
     const handleDrop = (player: Player, position: string) => {
         setPlayersInPositions((prev) => {
             const updatedPositions = { ...prev, [position]: player };
@@ -126,6 +131,10 @@ const TeamBuilder: React.FC = () => {
 
             return updatedPositions;
         });
+
+
+        
+
     };
 
     return (
@@ -133,6 +142,7 @@ const TeamBuilder: React.FC = () => {
             <div>
                 <p>Team Rating: {teamRating}</p>
                 <p>Team Chemistry: {teamChemistry}</p>
+                <SubmitTeamForm teamRating={teamRating} teamChemistry={teamChemistry} playersInPositions={playersInPositions} clearTeam={clearTeam} />
             </div>
             <div style={styles.teamArea}>
                 {positions.map((pos) => (
